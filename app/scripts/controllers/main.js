@@ -27,8 +27,10 @@ angular.module('stackOverlowAnalyticsApp')
 
     // console.log($scope.searchTag('java'));
 
-    StackExchange.getTagHistory('java')
-      .success(function(res) {
-        console.log(res.items);
-      });
+    $scope.getTagHistory = function(val) {
+      StackExchange.getTagHistory(val)
+        .success(function(res) {
+          console.log(res.items);
+        });
+    };
   });
