@@ -213,6 +213,17 @@ module.exports = function (grunt) {
       }
     },
 
+    buildcontrol: {
+      dist: {
+        options: {
+          remote: 'git@github.com:fredericlefeurmou/stack-overlow-analytics.git',
+          branch: 'gh-pages',
+          commit: true,
+          push: true
+        }
+      }
+    },
+
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
@@ -408,6 +419,10 @@ module.exports = function (grunt) {
     grunt.task.run(['serve:' + target]);
   });
 
+  grunt.registerTask('check', [
+    'jshint:all',
+  ]);
+
   grunt.registerTask('test', [
     'clean:server',
     'concurrent:test',
@@ -431,6 +446,13 @@ module.exports = function (grunt) {
     'filerev',
     'usemin',
     'htmlmin'
+  ]);
+
+   grunt.registerTask('deploy', [
+    'check',
+    'test',
+    'build',
+    'buildcontrol'
   ]);
 
   grunt.registerTask('default', [

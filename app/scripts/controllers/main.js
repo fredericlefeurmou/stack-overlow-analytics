@@ -37,7 +37,6 @@ angular.module('stackOverlowAnalyticsApp')
               name: tag,
               total: res.total
             };
-            console.log(trackedTagDetail)
             $scope.trackedTags.push(tag);
             $scope.trackedTagsDetail.push(trackedTagDetail);
             console.log($scope.trackedTags);
