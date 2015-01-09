@@ -14,21 +14,35 @@ angular.module('stackOverlowAnalyticsApp')
     var apiUrl = 'https://api.stackexchange.com/2.2';
 
     this.getTags = function() {
-      return $http.get(apiUrl + '/tags?order=desc&sort=popular&site=stackoverflow');
+      return $http.get(apiUrl + '/tags', {
+        params: {
+          order: 'desc',
+          sort: 'popular',
+          site: 'stackoverflow'
+        }
+      });
     };
 
-    this.searchTag = function(val) {
-      return $http.get('http://stackoverflow.com/filter/tags?q=' + val + '&newstyle=true');
+    this.searchTag = function(tag) {
+      return $http.get('http://stackoverflow.com/filter/tags', {
+        params: {
+          q: tag,
+          newstyle: true
+        }
+      });
     };
 
-    this.getTagHistory = function(tag, fromDate, toDate) {
-      var url = apiUrl + '/search?order=desc&sort=activity&site=stackoverflow&tagged='+tag;
-      if (fromDate) {
-        url += '&fromdate=' + fromDate;
-      }
-      if (toDate) {
-        url += '&todate=' + toDate;
-      }
-      return $http.get(url);
+    this.getTotalTaggedQuestions = function(tag, fromDate, toDate) {
+      return $http.get(apiUrl + '/search', {
+        params: {
+          order: 'desc',
+          sort: 'activity',
+          site: 'stackoverflow',
+          filter: 'total',
+          tagged: tag,
+          fromdate: fromDate,
+          todate: toDate
+        }
+      });
     };
   });
