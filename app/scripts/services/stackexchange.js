@@ -16,4 +16,13 @@ angular.module('stackOverlowAnalyticsApp')
     this.getTags = function() {
       return $http.get(apiUrl + '/tags?order=desc&sort=popular&site=stackoverflow');
     };
+
+    this.searchTag = function(val) {
+      return $http.get('http://stackoverflow.com/filter/tags?q=' + val + '&newstyle=true');
+    };
+
+    this.getTagHistory = function(tag, fromDate, toDate) {
+      var url = apiUrl + '/search?order=desc&sort=activity&site=stackoverflow&tagged='+tag;
+      return $http.get(url);
+    };
   });
