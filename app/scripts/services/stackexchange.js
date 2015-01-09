@@ -23,6 +23,12 @@ angular.module('stackOverlowAnalyticsApp')
 
     this.getTagHistory = function(tag, fromDate, toDate) {
       var url = apiUrl + '/search?order=desc&sort=activity&site=stackoverflow&tagged='+tag;
+      if (fromDate) {
+        url += '&fromdate=' + fromDate;
+      }
+      if (toDate) {
+        url += '&todate=' + toDate;
+      }
       return $http.get(url);
     };
   });
